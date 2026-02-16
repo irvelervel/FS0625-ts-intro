@@ -77,3 +77,74 @@ greet2('simone'); // 'ciao, simone'
 var anotherSum = function (n1, n2) {
     return n1 + n2;
 };
+// TYPE UNION
+// "unione di tipi" significa prevedere per una variabile un tipo appartenente a più "insiemi"
+var mixed = 'ciao';
+mixed = 10; // POSSIBILE, perchè il suo tipo appartiene all'unione di due insiemi, string e number
+var mixed2 = 100;
+var mixed3 = '50';
+var y = 'ciao';
+var giornoSettimana = 'Domenica';
+console.log(giornoSettimana);
+giornoSettimana = 'Venerdì';
+giornoSettimana = 'Domenica';
+// giornoSettimana = 'bobo' // <- dà errore perchè 'bobo' non è una delle possibilità espresse in WeekDay
+var specialNumber = 99;
+// specialNumber = 100 // <-- problema, 100 non fa parte dell'insieme dei tipi possibili
+// ARRAY
+var namesOrNumbers = [
+    'francesco',
+    'giulia',
+    'giorgia',
+    'giuseppe',
+];
+// oppure
+// const namesOrNumbers: PersonalType[] = ['francesco', 'giulia', 'giorgia', 'giuseppe']
+namesOrNumbers.push('davide');
+namesOrNumbers.push(100);
+// creiamo un array di sole stringhe
+var names = ['topo', 'gigio', 'coccole'];
+// modo alternativo
+var names2 = ['topo', 'gigio', 'coccole'];
+names.forEach(function (n) {
+    console.log(n.toUpperCase());
+});
+// trasformiamo names in un nuovo array fatto con le lunghezze delle stringhe
+var lengths = names.map(function (n) {
+    return n.length;
+});
+// lengths vale [4, 5, 7]
+// PersonalType era il nostro tipo custom per string | number
+var arrayX = ['ciao', 100];
+arrayX.push(200);
+arrayX.push('giorgia');
+arrayX.forEach(function (x) {
+    if (typeof x === 'string') {
+        // vuol dire che x è stringa
+        console.log('ho trovato una stringa', x.toUpperCase());
+    }
+    else {
+        // vuol dire che x è numero
+        console.log('ho trovato un numero', x.toPrecision(2));
+    }
+});
+var normalArray = ['ciao', 100, 'addio'];
+// nuovo tipo di dato in TS -> TUPLE
+var tupleArray = ['topo', 'gigio', 100];
+// una tupla richiede un numero di elementi predefinito e che ogni elemento abbia un tipo predefinito
+// una tupla non vincola l'array in fase successive: è comunque possibile espandere o ridurre la lunghezza dell'array
+// const addToArr = function(p1: string, p2: string, p3: number){
+//     return [p1, p2, p3]
+// }
+// OGGETTI
+// gli oggetti in TS sono la stessa struttura di JS
+var smartphone = {
+    brand: 'Apple',
+    model: 'iPhone 17',
+    color: 'green',
+    storage: 256,
+    activated: false,
+};
+// console.log(smartphone.store) // <-- errore, non esiste la proprietà "store"
+// INTERFACCE
+// GENERICS

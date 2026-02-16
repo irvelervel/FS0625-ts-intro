@@ -97,7 +97,109 @@ greet2('gianni', 'buongiorno') // 'buongiorno, gianni'
 greet2('simone') // 'ciao, simone'
 
 // creiamo ora una funzione in cui specifico personalmente il tipo del valore di ritorno
-
 const anotherSum = function (n1: number, n2: number): number {
   return n1 + n2
 }
+
+// TYPE UNION
+// "unione di tipi" significa prevedere per una variabile un tipo appartenente a più "insiemi"
+
+let mixed: string | number = 'ciao'
+mixed = 10 // POSSIBILE, perchè il suo tipo appartiene all'unione di due insiemi, string e number
+
+let mixed2: string | number = 100
+
+// TYPE ALIAS
+type PersonalType = string | number // d'ora in poi, scrivere PersonalType equivale a scrivere string | number
+
+let mixed3: PersonalType = '50'
+
+type Francesco = string // ho creato un tipo personalizzato per richiamare string
+
+const y: Francesco = 'ciao'
+
+type WeekDay =
+  | 'Lunedì'
+  | 'Martedì'
+  | 'Mercoledì'
+  | 'Giovedì'
+  | 'Venerdì'
+  | 'Sabato'
+  | 'Domenica'
+
+let giornoSettimana: WeekDay = 'Domenica'
+console.log(giornoSettimana)
+
+giornoSettimana = 'Venerdì'
+giornoSettimana = 'Domenica'
+
+// giornoSettimana = 'bobo' // <- dà errore perchè 'bobo' non è una delle possibilità espresse in WeekDay
+
+let specialNumber: 33 | 66 | 99 = 99
+// specialNumber = 100 // <-- problema, 100 non fa parte dell'insieme dei tipi possibili
+
+// ARRAY
+const namesOrNumbers: (string | number)[] = [
+  'francesco',
+  'giulia',
+  'giorgia',
+  'giuseppe',
+]
+// oppure
+// const namesOrNumbers: PersonalType[] = ['francesco', 'giulia', 'giorgia', 'giuseppe']
+namesOrNumbers.push('davide')
+namesOrNumbers.push(100)
+
+// creiamo un array di sole stringhe
+const names: string[] = ['topo', 'gigio', 'coccole']
+// modo alternativo
+const names2: Array<string> = ['topo', 'gigio', 'coccole']
+
+names.forEach((n) => {
+  console.log(n.toUpperCase())
+})
+
+// trasformiamo names in un nuovo array fatto con le lunghezze delle stringhe
+const lengths: number[] = names.map((n) => {
+  return n.length
+})
+// lengths vale [4, 5, 7]
+
+// PersonalType era il nostro tipo custom per string | number
+const arrayX = ['ciao', 100]
+arrayX.push(200)
+arrayX.push('giorgia')
+arrayX.forEach((x) => {
+  if (typeof x === 'string') {
+    // vuol dire che x è stringa
+    console.log('ho trovato una stringa', x.toUpperCase())
+  } else {
+    // vuol dire che x è numero
+    console.log('ho trovato un numero', x.toPrecision(2))
+  }
+})
+
+const normalArray: (string | number)[] = ['ciao', 100, 'addio']
+// nuovo tipo di dato in TS -> TUPLE
+const tupleArray: [string, string, number] = ['topo', 'gigio', 100]
+// una tupla richiede un numero di elementi predefinito e che ogni elemento abbia un tipo predefinito
+// una tupla non vincola l'array in fase successive: è comunque possibile espandere o ridurre la lunghezza dell'array
+
+// const addToArr = function(p1: string, p2: string, p3: number){
+//     return [p1, p2, p3]
+// }
+
+// OGGETTI
+// gli oggetti in TS sono la stessa struttura di JS
+const smartphone = {
+  brand: 'Apple',
+  model: 'iPhone 17',
+  color: 'green',
+  storage: 256,
+  activated: false,
+}
+
+// console.log(smartphone.store) // <-- errore, non esiste la proprietà "store"
+
+// INTERFACCE
+// GENERICS
