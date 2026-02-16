@@ -197,9 +197,103 @@ const smartphone = {
   color: 'green',
   storage: 256,
   activated: false,
+  configuration: {
+    onlinePurchase: true,
+    date: '2026-02-16',
+  },
+  availableStorages: [256, 512, 1024],
 }
 
+smartphone.availableStorages.forEach((as) => {
+  console.log(as.toString())
+})
 // console.log(smartphone.store) // <-- errore, non esiste la proprietà "store"
 
-// INTERFACCE
+const dog1 = {
+  breed: 'Shepard',
+  age: 3,
+  personality: 'Playful',
+}
+
+// come faccio a replicare la struttura di questo dog1 in modo da poterla riutilizzare?
+// con le INTERFACES (INTERFACCE)
+
+interface Dog {
+  breed: string
+  age: number
+  personality: string
+}
+
+const dog2: Dog = {
+  breed: 'Retriever',
+  age: 6,
+  personality: 'Sleeper',
+}
+
+interface PedegreeDog extends Dog {
+  pedegreeType: number
+}
+// PedegreeDog è un'interfaccia dotata di 4 proprietà: breed, age e personality le ha ereditate dall'interfaccia
+// Dog mentre pedegreeType l'ha dichiarata lei
+
+const dog3: PedegreeDog = {
+  breed: 'Poddle',
+  age: 3,
+  personality: 'Diva',
+  pedegreeType: 1,
+}
+
 // GENERICS
+
+type CivicNumber = number | string
+
+interface Address {
+  civicNumber: CivicNumber
+  street: string
+  city: string
+  zipCode?: string // definisco zipCode opzionale
+}
+
+const epicodeAddress: Address = {
+  civicNumber: 16,
+  street: 'Via dei Magazzini Generali',
+  city: 'Rome',
+  zipCode: '00154',
+}
+
+const anotherAddress: Address = {
+  civicNumber: '25/A',
+  street: 'Via Roma',
+  city: 'Trieste',
+  zipCode: '00011',
+}
+
+// questa soluzione funziona, lascia però un po' di ambiguità nella definizione dell'interfaccia,
+// dove una delle proprietà (civicNumber) viene definita con l'unione di due tipi (string | number).
+
+// una soluzione più elegante (ma che porta ad un risultato simile) potrebbe essere l'utilizzo di un GENERIC.
+// che cos'è un generic? un generic è un PARAMETRO DI TIPO per un'interfaccia.
+
+interface GenericAddress<A> {
+  civicNumber: A
+  street: string
+  city: string
+  zipCode: string
+}
+
+// ora, l'interfaccia GenericAddress NON SA quale sarà il tipo di civicNumber!
+// sarà l'UTILIZZO dell'interfaccia (quando creeremo gli oggetti) che fornirà a GenericAddress il tipo per civicNumber
+
+const simpleAddress: GenericAddress<number> = {
+  civicNumber: 100,
+  street: 'Corso Italia',
+  city: 'Bologna',
+  zipCode: '23232',
+}
+
+const complexAddress: GenericAddress<string> = {
+  civicNumber: '100/C',
+  street: 'Via Roma',
+  city: 'Napoli',
+  zipCode: '34433',
+}

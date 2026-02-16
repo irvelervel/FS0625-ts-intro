@@ -144,7 +144,57 @@ var smartphone = {
     color: 'green',
     storage: 256,
     activated: false,
+    configuration: {
+        onlinePurchase: true,
+        date: '2026-02-16',
+    },
+    availableStorages: [256, 512, 1024],
 };
+smartphone.availableStorages.forEach(function (as) {
+    console.log(as.toString());
+});
 // console.log(smartphone.store) // <-- errore, non esiste la proprietà "store"
-// INTERFACCE
-// GENERICS
+var dog1 = {
+    breed: 'Shepard',
+    age: 3,
+    personality: 'Playful',
+};
+var dog2 = {
+    breed: 'Retriever',
+    age: 6,
+    personality: 'Sleeper',
+};
+// PedegreeDog è un'interfaccia dotata di 4 proprietà: breed, age e personality le ha ereditate dall'interfaccia
+// Dog mentre pedegreeType l'ha dichiarata lei
+var dog3 = {
+    breed: 'Poddle',
+    age: 3,
+    personality: 'Diva',
+    pedegreeType: 1,
+};
+var epicodeAddress = {
+    civicNumber: 16,
+    street: 'Via dei Magazzini Generali',
+    city: 'Rome',
+    zipCode: '00154',
+};
+var anotherAddress = {
+    civicNumber: '25/A',
+    street: 'Via Roma',
+    city: 'Trieste',
+    zipCode: '00011',
+};
+// ora, l'interfaccia GenericAddress NON SA quale sarà il tipo di civicNumber!
+// sarà l'UTILIZZO dell'interfaccia (quando creeremo gli oggetti) che fornirà a GenericAddress il tipo per civicNumber
+var simpleAddress = {
+    civicNumber: 100,
+    street: 'Corso Italia',
+    city: 'Bologna',
+    zipCode: '23232',
+};
+var complexAddress = {
+    civicNumber: '100/C',
+    street: 'Via Roma',
+    city: 'Napoli',
+    zipCode: '34433',
+};
